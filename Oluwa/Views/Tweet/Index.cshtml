@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Oluwa.Models.Tweet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Tweets</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Post a Tweet</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("Post", "Tweet", FormMethod.Post))
+                        {
+
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+
+                            <div class="input-group">
+                                <input hidden name="User" value="Ade"/>
+                                <input type="text" name="Content" class="form-control" placeholder="Enter Tweet to Post" style="max-width: 1010px;">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">Post Tweet!</button>
+                                </span>
+                            </div><!-- /input-group -->
+
+                        }
+
+                    </div><!-- /.col-lg-6 -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@item.User</div>
+            <div class="panel-body">
+                @item.Content
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span> <a href="#"><i class="glyphicon glyphicon-pencil"></i></a></span>
+                    </div>
+                    <div class="col-md-4">
+                        <span> <a href="#"><i class="glyphicon glyphicon-heart"></i> @item.NoOfLikes</a> </span>
+                    </div>
+                    <div class="col-md-4">
+                        <span> <a href="#"><i class="glyphicon glyphicon-refresh"></i> @item.NoOfLikes</a> </span>
+                    </div>
+
+                </div>
+               
+
+               
+            </div>
+        </div>
+    }
+
+
+</div>
